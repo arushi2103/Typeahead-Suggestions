@@ -25,7 +25,6 @@ public class SearchService {
     //Methods
     // Search API with caching
     public List<String> getTrieSuggestions(String prefix) {
-
         //CACHED SUGGESTIONS
         //1.first search in cache if available
         List<String>cachedSuggestions=cacheService.getCachedSuggestions(prefix);
@@ -45,7 +44,6 @@ public class SearchService {
             cacheService.cacheEmptyResponses(prefix);
             return List.of();   //return empty list instead of throwing error
         }
-
         //FREQUENCY  & RECENCY
         //4. Fetch frequency and recency from MongoDB for ranking
         List<SearchTerm> searchTerms=searchRepository.findByTermStartingWith(prefix);
@@ -87,9 +85,6 @@ public class SearchService {
         double recencyScore=1.0/(1+timeElapsed);//Normalize recency score
         return (w_frequency*searchTerm.getFrequency())+(w_recency*recencyScore);
     }
-
-
-
     // Update Trie & clear cache on insert for a new search term
     public void updateTrieSearchTerm(SearchTerm searchTerm){
         searchRepository.save(searchTerm);
@@ -99,3 +94,8 @@ public class SearchService {
         cacheService.clearCache(searchTerm.getTerm());
     }
 }
+
+
+
+
+
