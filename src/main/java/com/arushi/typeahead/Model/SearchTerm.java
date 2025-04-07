@@ -14,6 +14,7 @@ public class SearchTerm {
     @Id                                     // @Id: Marks this field as the primary key.
     private String term;
     private int frequency;
+
     private Instant lastSearched = Instant.now(); // Instant.now(): Returns the current date-time in UTC.
 //    // ✅ Add explicit constructor (if Lombok is not used)
 //    public SearchTerm(String term, int frequency, Instant lastSearched) {
