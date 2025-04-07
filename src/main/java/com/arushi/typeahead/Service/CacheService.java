@@ -1,5 +1,4 @@
 package com.arushi.typeahead.Service;
-
 import com.arushi.typeahead.Model.SearchTerm;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -13,11 +12,9 @@ import java.util.stream.Collectors;
 @Service
 public class CacheService {
     private final RedisTemplate<String, String> redisTemplate;
-
     public CacheService( RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
-
     //Get Cached suggestions
     public List<String> getCachedSuggestions(String prefix){
         String cacheKey="suggestions:"+prefix;
@@ -47,7 +44,6 @@ public class CacheService {
     public void clearCache(String prefix){
         redisTemplate.delete("suggestions:"+prefix);
     }
-
     //Flush entire cache periodically
     public void clearAllCache(){
         redisTemplate.getConnectionFactory().getConnection().flushAll();
